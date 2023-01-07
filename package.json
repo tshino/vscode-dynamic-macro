@@ -1,0 +1,26 @@
+{
+    "name": "dynamic-macro",
+    "displayName": "Dynamic Macro",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.74.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [],
+    "main": "./src/extension.js",
+    "contributes": {},
+    "scripts": {
+        "lint": "eslint .",
+        "pretest": "npm run lint",
+        "test": "node ./test/runTest.js"
+    },
+    "devDependencies": {
+        "@vscode/test-electron": "^2.2.1",
+        "eslint": "^8.31.0",
+        "glob": "^8.0.3",
+        "mocha": "^10.2.0"
+    }
+}
