@@ -1,4 +1,4 @@
 # Dynamic Macro for Visual Studio Code
 
-[Dynamic Macro](https://scrapbox.io/masui/Dynamic_Macro)のVS Code版です（未完成）。
+[増井俊之氏](https://github.com/masui)の[Dynamic Macro](https://scrapbox.io/masui/Dynamic_Macro)のVS Code版を開発するリポジトリです。
 
