@@ -7,11 +7,25 @@
         "vscode": "^1.74.0"
     },
     "categories": [
-        "Other"
+        "Keymaps", "Other"
     ],
-    "activationEvents": [],
+    "activationEvents": [
+        "onStartupFinished",
+        "onCommand:dynamic-macro.repeat"
+    ],
     "main": "./src/extension.js",
-    "contributes": {},
+    "contributes": {
+        "keybindings": [
+            {
+                "key": "ctrl+alt+l",
+                "command": "-kb-macro.wrap"
+            },
+            {
+                "key": "ctrl+alt+l",
+                "command": "dynamic-macro.repeat"
+            }
+        ]
+    },
     "scripts": {
         "lint": "eslint .",
         "pretest": "npm run lint",
@@ -22,5 +36,8 @@
         "eslint": "^8.31.0",
         "glob": "^8.0.3",
         "mocha": "^10.2.0"
-    }
+    },
+    "extensionDependencies": [
+        "tshino.kb-macro"
+    ]
 }
