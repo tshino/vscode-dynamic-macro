@@ -9,6 +9,15 @@
     "categories": [
         "Keymaps", "Other"
     ],
+	"keywords": [
+		"dynamic macro",
+		"keyboard macro",
+		"macro"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tshino/vscode-dynamic-macro.git"
+	},
     "activationEvents": [
         "onStartupFinished",
         "onCommand:dynamic-macro.repeat"
