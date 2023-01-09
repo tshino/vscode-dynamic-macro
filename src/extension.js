@@ -1,25 +1,20 @@
 const vscode = require('vscode');
 const kbmacro = require('./kbmacro.js');
+const dmacro = require('./dmacro.js');
 
 const repeat = async function() {
-    const api = await kbmacro.getApi();
-    if (!api) {
-        return;
-    }
-    const records = api.getRecentBackgroundRecords();
-    console.log(records);
+    kbmacro.getApi().then(async api => {
+        const records = api.getRecentBackgroundRecords();
+        console.log(records);
 
-    // repeat the last single command (experimental)
-    if (0 < records.length) {
-        await vscode.commands.executeCommand(
-            'kb-macro.playback',
-            {
-                sequence: [
-                    records[records.length - 1]
-                ]
-            }
-        );
-    }
+        const sequenceToExecute = dmacro.detect(records, api.areEqualRecords);
+        if (0 < sequenceToExecute.length) {
+            await vscode.commands.executeCommand(
+                'kb-macro.playback',
+                { sequence: sequenceToExecute }
+            );
+        }
+    });
 };
 
 function activate(context) {
@@ -30,12 +25,9 @@ function activate(context) {
         )
     );
 
-    (async () => {
-        const api = await kbmacro.getApi();
-        if (api) {
-            await api.startBackgroundRecording();
-        }
-    })();
+    kbmacro.getApi().then(async api => {
+        await api.startBackgroundRecording();
+    });
 }
 
 function deactivate() {}
