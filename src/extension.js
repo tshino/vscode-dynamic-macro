@@ -1,43 +1,8 @@
 const vscode = require('vscode');
-
-const getKbmacroApi = (function() {
-    let api = null;
-
-    return async function() {
-        if (api) {
-            return api;
-        }
-        const kbmacro = vscode.extensions.getExtension('tshino.kb-macro');
-        if (!kbmacro) {
-            console.error('Dynamic Macro: The Keyboard Macro Beta extension not found.');
-            return;
-        }
-        if (!kbmacro.isActive) {
-            api = await kbmacro.activate();
-        } else {
-            api = kbmacro.exports;
-        }
-        if (!api) {
-            console.error('Dynamic Macro: The Keyboard Macro Beta extension seems to have no API.');
-            return;
-        }
-        const requiredApis = [
-            'startBackgroundRecording',
-            'stopBackgroundRecording',
-            'getRecentBackgroundRecords',
-        ];
-        for (const func of requiredApis) {
-            if (!(func in api)) {
-                console.error(`Dynamic Macro: The Keyboard Macro Beta extension does not have the ${func} API.`);
-                return;
-            }
-        }
-        return api;
-    };
-})();
+const kbmacro = require('./kbmacro.js');
 
 const repeat = async function() {
-    const api = await getKbmacroApi();
+    const api = await kbmacro.getApi();
     if (!api) {
         return;
     }
@@ -66,7 +31,7 @@ function activate(context) {
     );
 
     (async () => {
-        const api = await getKbmacroApi();
+        const api = await kbmacro.getApi();
         if (api) {
             await api.startBackgroundRecording();
         }
