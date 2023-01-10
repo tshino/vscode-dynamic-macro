@@ -4,7 +4,7 @@ const dmacro = require('../../src/dmacro.js');
 describe('dmacro', () => {
     describe('detect', () => {
         const detect = dmacro.detect;
-        const eq = (a, b) => a == b;
+        const eq = (a, b) => a === b;
 
         it('should return empty for empty input', () => {
             assert.deepStrictEqual(detect([], eq), []);
@@ -24,7 +24,9 @@ describe('dmacro', () => {
                 assert.deepStrictEqual(detect(['x', 'y', 'a', 'b', 'a', 'b'], eq), ['a', 'b']);
                 assert.deepStrictEqual(detect(['x', 'y', 'a', 'b', 'c', 'a', 'b', 'c'], eq), ['a', 'b', 'c']);
             });
-            // TODO: test for longest match
+            it('should find longest match', () => {
+                assert.deepStrictEqual(detect(['f', 'o', 'o', 'f', 'o', 'o'], eq), ['f', 'o', 'o']);
+            });
         });
         // TODO: test for rule2
     });
