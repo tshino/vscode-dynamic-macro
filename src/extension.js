@@ -2,18 +2,34 @@ const vscode = require('vscode');
 const kbmacro = require('./kbmacro.js');
 const dmacro = require('./dmacro.js');
 
-const repeat = async function(api) {
-    const records = api.getRecentBackgroundRecords();
-    console.log(records);
+const playback = async function(api, sequence) {
+    await api.stopBackgroundRecording();
+    await vscode.commands.executeCommand(
+        'kb-macro.playback',
+        { sequence }
+    );
+    await api.startBackgroundRecording();
+}
 
-    const sequenceToExecute = dmacro.detect(records, api.areEqualRecords);
-    if (0 < sequenceToExecute.length) {
-        await vscode.commands.executeCommand(
-            'kb-macro.playback',
-            { sequence: sequenceToExecute }
-        );
-    }
-};
+const repeat = (function() {
+    let lastMacro = null;
+    return async function(api) {
+        const records = api.getRecentBackgroundRecords();
+        console.log(records);
+
+        const { macro } = dmacro.detect(records, api.areEqualRecords);
+        if (macro) {
+            lastMacro = macro;
+            await playback(api, macro);
+            return;
+        }
+        if (records.length === 0 && lastMacro) {
+            await playback(api, lastMacro);
+            return;
+        }
+        lastMacro = null;
+    };
+})();
 
 function activate(context) {
     let api = null;

@@ -1,6 +1,6 @@
 const detect = function(sequence, equals) {
     if (0 === sequence.length) {
-        return [];
+        return {};
     }
     const rule1Matches = [];
     for (let distance = 1; distance < Math.min(100, sequence.length); distance++) {
@@ -15,9 +15,10 @@ const detect = function(sequence, equals) {
         }
     }
     if (0 < rule1Matches.length) {
-        return sequence.slice(-rule1Matches.pop());
+        const macro = sequence.slice(-rule1Matches.pop());
+        return { macro };
     }
-    return [];
+    return {};
 };
 
 module.exports = {

@@ -7,25 +7,55 @@ describe('dmacro', () => {
         const eq = (a, b) => a === b;
 
         it('should return empty for empty input', () => {
-            assert.deepStrictEqual(detect([], eq), []);
+            assert.deepStrictEqual(
+                detect([], eq),
+                {}
+            );
         });
         it('should return empty if no repeat found', () => {
-            assert.deepStrictEqual(detect(['a'], eq), []);
-            assert.deepStrictEqual(detect(['a', 'b', 'c'], eq), []);
+            assert.deepStrictEqual(
+                detect(['a'], eq),
+                {}
+            );
+            assert.deepStrictEqual(
+                detect(['a', 'b', 'c'], eq),
+                {}
+            );
         });
         describe('rule1', () => {
             it('should detect repeat of the same sequence as rule1', () => {
-                assert.deepStrictEqual(detect(['a', 'a'], eq), ['a']);
-                assert.deepStrictEqual(detect(['a', 'b', 'a', 'b'], eq), ['a', 'b']);
-                assert.deepStrictEqual(detect(['a', 'b', 'c', 'a', 'b', 'c'], eq), ['a', 'b', 'c']);
+                assert.deepStrictEqual(
+                    detect(['a', 'a'], eq),
+                    { macro: ['a'] }
+                );
+                assert.deepStrictEqual(
+                    detect(['a', 'b', 'a', 'b'], eq),
+                    { macro: ['a', 'b'] }
+                );
+                assert.deepStrictEqual(
+                    detect(['a', 'b', 'c', 'a', 'b', 'c'], eq),
+                    { macro: ['a', 'b', 'c'] }
+                );
             });
             it('should detect twice repeat with leading irrelevant input', () => {
-                assert.deepStrictEqual(detect(['x', 'y', 'a', 'a'], eq), ['a']);
-                assert.deepStrictEqual(detect(['x', 'y', 'a', 'b', 'a', 'b'], eq), ['a', 'b']);
-                assert.deepStrictEqual(detect(['x', 'y', 'a', 'b', 'c', 'a', 'b', 'c'], eq), ['a', 'b', 'c']);
+                assert.deepStrictEqual(
+                    detect(['x', 'y', 'a', 'a'], eq),
+                    { macro: ['a'] }
+                );
+                assert.deepStrictEqual(
+                    detect(['x', 'y', 'a', 'b', 'a', 'b'], eq),
+                    { macro: ['a', 'b'] }
+                );
+                assert.deepStrictEqual(
+                    detect(['x', 'y', 'a', 'b', 'c', 'a', 'b', 'c'], eq),
+                    { macro: ['a', 'b', 'c'] }
+                );
             });
             it('should find longest match', () => {
-                assert.deepStrictEqual(detect(['f', 'o', 'o', 'f', 'o', 'o'], eq), ['f', 'o', 'o']);
+                assert.deepStrictEqual(
+                    detect(['f', 'o', 'o', 'f', 'o', 'o'], eq),
+                    { macro: ['f', 'o', 'o'] }
+                );
             });
         });
         // TODO: test for rule2
