@@ -2,9 +2,34 @@
 
 [増井俊之](https://github.com/masui)氏の[Dynamic Macro](https://scrapbox.io/masui/Dynamic_Macro)のVS Code版を開発するリポジトリです。
 
+## 利用方法
+
+<kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>L</kbd> （<kbd>繰り返し</kbd>キー）は次のように動作します。
+
+1. 同じ操作を2回行った直後に<kbd>繰り返し</kbd>キーを押した場合
+    - 1回分の操作が実行される。
+    - 続けて<kbd>繰り返し</kbd>キーを押せば同じ操作が1回ずつ実行される。
+    ```
+    abc abc _
+    -->
+    abc abc abc _
+    -->
+    abc abc abc abc _
+    ```
+2. 同じ操作の2回目を途中まで行った直後に<kbd>繰り返し</kbd>キーを押した場合
+    - まず2回目の操作の残り部分が実行される。
+    - 続けて<kbd>繰り返し</kbd>キーを押せば同じ操作の全体が1回ずつ実行される。
+    ```
+    abc a_
+    -->
+    abc abc _
+    -->
+    abc abc abc _
+    ```
+
 ## インストール
 
-開発中のため（Marketplace には未公開なので）以下のように手動でインストールする必要があります。
+Marketplace には未公開のため、以下のように手動でインストールする必要があります。
 また、Dynamic Macro は既存の別のVS Code拡張である [Keyboard Macro Beta](https://github.com/tshino/vscode-kb-macro) の機能を利用して実現するため、それもインストールする必要があります。
 
 1. 必要なソフトウェアをインストール
@@ -38,16 +63,6 @@
     ```
     - このようにインストールする代わりに、[VS Code上で拡張機能をデバッグ実行する方法](https://code.visualstudio.com/api/get-started/your-first-extension)もあります。
 
-## 利用
+## 参考文献
 
-Dynamic Macroの機能は未実装です。
-代わりに <kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>L</kbd> で「最後に入力したキーを再実行」できるようにしてあります。
-これは、Dynamic Macro機能を実装するための道具立てが揃ったことの確認の意味で実装したものです。
-道具立てとは以下のものです。
-
-- [Background Recording API](https://github.com/tshino/vscode-kb-macro/issues/176)
-    - VS Code上で入力されたコマンド列（文字入力もコマンドとして扱う）を記録し続けるAPI
-- [History API](https://github.com/tshino/vscode-kb-macro/issues/177)
-    - 最新の入力コマンド列を取得するAPI
-- Playbackコマンド
-    - 任意のコマンド列を指定して再実行するコマンド
+Toshiyuki Masui and Ken Nakayama. 1994. Repeat and predict—two keys to efficient text editing. In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI '94). Association for Computing Machinery, New York, NY, USA, 118–130. https://doi.org/10.1145/191666.191722
