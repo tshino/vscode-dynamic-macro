@@ -15,7 +15,6 @@ const repeat = (function() {
     let lastMacro = null;
     return async function(api) {
         const records = api.getRecentBackgroundRecords();
-        console.log(records);
 
         const { macro, position=0 } = dmacro.detect(records, api.areEqualRecords);
         if (macro) {
