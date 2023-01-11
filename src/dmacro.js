@@ -2,7 +2,8 @@ const detect = function(sequence, equals) {
     if (0 === sequence.length) {
         return {};
     }
-    const rule1Matches = [];
+    let rule1Match = null;
+    let rule2Match = null;
     for (let distance = 1; distance < Math.min(100, sequence.length); distance++) {
         let match = 0, pos = sequence.length - 1;
         for (; match < distance; match++, pos--) {
@@ -11,12 +12,21 @@ const detect = function(sequence, equals) {
             }
         }
         if (match === distance) {
-            rule1Matches.push(distance);
+            rule1Match = distance;
+        } else if (0 < match) {
+            if (rule2Match === null || rule2Match.match < match) {
+                rule2Match = { distance, match };
+            }
         }
     }
-    if (0 < rule1Matches.length) {
-        const macro = sequence.slice(-rule1Matches.pop());
+    if (rule1Match !== null) {
+        const macro = sequence.slice(-rule1Match);
         return { macro };
+    }
+    if (rule2Match !== null) {
+        const macro = sequence.slice(-rule2Match.distance - rule2Match.match, -rule2Match.match);
+        const position = rule2Match.match;
+        return { macro, position };
     }
     return {};
 };

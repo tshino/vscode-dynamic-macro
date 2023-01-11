@@ -22,6 +22,7 @@ describe('dmacro', () => {
                 {}
             );
         });
+
         describe('rule1', () => {
             it('should detect repeat of the same sequence as rule1', () => {
                 assert.deepStrictEqual(
@@ -58,6 +59,40 @@ describe('dmacro', () => {
                 );
             });
         });
-        // TODO: test for rule2
+
+        describe('rule2', () => {
+            it('should detect partial repeat of the same sequence as rule2', () => {
+                assert.deepStrictEqual(
+                    detect(['a', 'b', 'a'], eq),
+                    { macro: ['a', 'b'], position: 1 }
+                );
+                assert.deepStrictEqual(
+                    detect(['a', 'b', 'c', 'a', 'b'], eq),
+                    { macro: ['a', 'b', 'c'], position: 2 }
+                );
+                assert.deepStrictEqual(
+                    detect(['a', 'b', 'c', 'a', 'b', 'a', 'b', 'c'], eq),
+                    { macro: ['a', 'b', 'c', 'a', 'b'], position: 3 }
+                );
+            });
+            it('should detect partial repeat with leading irrelevant input', () => {
+                assert.deepStrictEqual(
+                    detect(['x', 'y', 'a', 'b', 'c', 'a'], eq),
+                    { macro: ['a', 'b', 'c'], position: 1 }
+                );
+            });
+            it('should find longest match', () => {
+                assert.deepStrictEqual(
+                    detect(['b', 'c', 'a', 'b', 'c', 'd', 'a', 'b', 'c'], eq),
+                    { macro: ['a', 'b', 'c', 'd'], position: 3 }
+                );
+            });
+            it('should find longest and least distant match', () => {
+                assert.deepStrictEqual(
+                    detect(['a', 'b', 'c', 'a', 'b', 'c', 'd', 'a', 'b', 'c'], eq),
+                    { macro: ['a', 'b', 'c', 'd'], position: 3 }
+                );
+            });
+        });
     });
 });

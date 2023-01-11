@@ -17,10 +17,10 @@ const repeat = (function() {
         const records = api.getRecentBackgroundRecords();
         console.log(records);
 
-        const { macro } = dmacro.detect(records, api.areEqualRecords);
+        const { macro, position=0 } = dmacro.detect(records, api.areEqualRecords);
         if (macro) {
             lastMacro = macro;
-            await playback(api, macro);
+            await playback(api, macro.slice(position));
             return;
         }
         if (records.length === 0 && lastMacro) {
