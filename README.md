@@ -32,6 +32,8 @@
 Marketplace には未公開のため、以下のように手動でインストールする必要があります。
 また、Dynamic Macro は既存の別のVS Code拡張である [Keyboard Macro Beta](https://github.com/tshino/vscode-kb-macro) の機能を利用して実現するため、それもインストールする必要があります。
 
+Windowsでのみ動作確認済みですが、LinuxとmacOSでも同じく動作すると思います。
+
 1. 必要なソフトウェアをインストール
     - [Node.js](https://nodejs.org/en/)
     - [Git](https://git-scm.com/)
