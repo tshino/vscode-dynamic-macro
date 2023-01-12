@@ -25,6 +25,17 @@
     ],
     "main": "./src/extension.js",
     "contributes": {
+        "configuration": {
+            "title": "Dynamic Macro",
+            "properties": {
+                "dynamicMacro.maxMacroLength": {
+                    "type": "number",
+                    "default": 64,
+                    "minimum": 1,
+                    "description": "Specifies the maximum length of a macro that the Dynamic Macro extension can detect and run"
+                }
+            }
+        },
         "keybindings": [
             {
                 "key": "ctrl+alt+l",

@@ -11,12 +11,18 @@ const playback = async function(api, sequence) {
     await api.startBackgroundRecording();
 }
 
+const getConfig = function() {
+    const config = vscode.workspace.getConfiguration('dynamicMacro');
+    return config;
+};
+
 const repeat = (function() {
     let lastMacro = null;
     return async function(api) {
         const records = api.getRecentBackgroundRecords();
+        const config = getConfig();
 
-        const { macro, position=0 } = dmacro.detect(records, api.areEqualRecords);
+        const { macro, position=0 } = dmacro.detect(records, api.areEqualRecords, config);
         if (macro) {
             lastMacro = macro;
             await playback(api, macro.slice(position));

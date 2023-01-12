@@ -44,6 +44,14 @@
 ```
 `keybindings.json` ファイルはコマンドパレット（CTRL+SHIFT+P または CMD+SHIFT+P）から「Preferences: Open Keyboard Shortcuts (JSON)」というコマンドを検索して実行すると開けます。
 
+## 設定
+
+VS Codeの設定画面から以下の設定を変更できます。
+
+| 設定名 | 既定値 | 指定する値 |
+| ------ | ------ | ---------- |
+| Dynamic Macro: Max Macro Length | 64 | 検出するマクロの最大長 <br>長いマクロが誤検出が気になる場合は小さめに設定してください |
+
 ## インストール方法
 
 Marketplace には未公開のため、以下のように手動でインストールする必要があります。

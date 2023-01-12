@@ -94,5 +94,19 @@ describe('dmacro', () => {
                 );
             });
         });
+
+        describe('maxMacroLength', () => {
+            it('should specifies the limit of macro length', () => {
+                const input = ['a', 'b', 'c', 'd', 'e', 'a', 'b', 'c', 'd', 'e'];
+                assert.deepStrictEqual(
+                    detect(input, eq, { maxMacroLength: 5 }),
+                    { macro: ['a', 'b', 'c', 'd', 'e'] }
+                );
+                assert.deepStrictEqual(
+                    detect(input, eq, { maxMacroLength: 4 }),
+                    {}
+                );
+            });
+        });
     });
 });
