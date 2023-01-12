@@ -7,17 +7,18 @@
         "vscode": "^1.74.0"
     },
     "categories": [
-        "Keymaps", "Other"
+        "Keymaps",
+        "Other"
     ],
-	"keywords": [
-		"dynamic macro",
-		"keyboard macro",
-		"macro"
-	],
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/tshino/vscode-dynamic-macro.git"
-	},
+    "keywords": [
+        "dynamic macro",
+        "keyboard macro",
+        "macro"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tshino/vscode-dynamic-macro.git"
+    },
     "activationEvents": [
         "onStartupFinished",
         "onCommand:dynamic-macro.repeat"
@@ -44,7 +45,8 @@
         "@vscode/test-electron": "^2.2.2",
         "eslint": "^8.31.0",
         "glob": "^8.0.3",
-        "mocha": "^10.2.0"
+        "mocha": "^10.2.0",
+        "vsce": "^2.15.0"
     },
     "extensionDependencies": [
         "tshino.kb-macro"
