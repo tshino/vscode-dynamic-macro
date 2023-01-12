@@ -24,8 +24,9 @@ const detect = function(sequence, equals) {
         return { macro };
     }
     if (rule2Match !== null) {
-        const macro = sequence.slice(-rule2Match.distance - rule2Match.match, -rule2Match.match);
-        const position = rule2Match.match;
+        const { distance, match } = rule2Match;
+        const macro = sequence.slice(-distance - match, -match);
+        const position = match;
         return { macro, position };
     }
     return {};
