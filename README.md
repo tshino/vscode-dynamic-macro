@@ -2,7 +2,7 @@
 
 [増井俊之](https://github.com/masui)氏の[Dynamic Macro](https://scrapbox.io/masui/Dynamic_Macro)のVS Code版を開発するリポジトリです。
 
-## 利用方法
+## 使い方
 
 <kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>L</kbd> （<kbd>繰り返し</kbd>キー）は次のように動作します。
 
@@ -16,7 +16,7 @@
     -->
     abc abc abc abc _
     ```
-2. 同じ操作の2回目を途中まで行った直後に<kbd>繰り返し</kbd>キーを押した場合
+2. 同じ操作の2回目を途中まで行ったところで<kbd>繰り返し</kbd>キーを押した場合
     - まず2回目の操作の残り部分が実行される。
     - 続けて<kbd>繰り返し</kbd>キーを押せば同じ操作の全体が1回ずつ実行される。
     ```
@@ -27,7 +27,24 @@
     abc abc abc _
     ```
 
-## インストール
+## 割り当てるキーの変更方法
+
+以下のような記述を、VS Codeの設定ファイルの1つである `keybindings.json` に追加することで割り当てを変更できます。
+```jsonc
+    {
+        // デフォルトの割り当てを無効化
+        "key": "ctrl+alt+l",
+        "command": "-dynamic-macro.repeat"
+    },
+    {
+        // 別のキーを割り当て（ctrl+alt+x のところを好きなキーに書き換えてください）
+        "key": "ctrl+alt+x",
+        "command": "dynamic-macro.repeat"
+    }
+```
+`keybindings.json` ファイルはコマンドパレット（CTRL+SHIFT+P または CMD+SHIFT+P）から「Preferences: Open Keyboard Shortcuts (JSON)」というコマンドを検索して実行すると開けます。
+
+## インストール方法
 
 Marketplace には未公開のため、以下のように手動でインストールする必要があります。
 また、Dynamic Macro は既存の別のVS Code拡張である [Keyboard Macro Beta](https://github.com/tshino/vscode-kb-macro) の機能を利用して実現するため、それもインストールする必要があります。
