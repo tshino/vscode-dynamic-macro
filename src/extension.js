@@ -1,6 +1,7 @@
 const vscode = require('vscode');
 const kbmacro = require('./kbmacro.js');
 const dmacro = require('./dmacro.js');
+const reentrantGuard = require('./reentrant_guard.js');
 
 const playback = async function(api, sequence) {
     await api.stopBackgroundRecording();
@@ -16,9 +17,9 @@ const getConfig = function() {
     return config;
 };
 
-const repeat = (function() {
-    let lastMacro = null;
-    return async function(api) {
+let lastMacro = null;
+const repeatCommand = reentrantGuard.makeQueueableCommand(
+    async function(api) {
         const records = api.getRecentBackgroundRecords();
         const config = getConfig();
 
@@ -33,8 +34,9 @@ const repeat = (function() {
             return;
         }
         lastMacro = null;
-    };
-})();
+    },
+    { queueSize: 2 }
+);
 
 function activate(context) {
     let api = null;
@@ -42,9 +44,10 @@ function activate(context) {
     context.subscriptions.push(
         vscode.commands.registerCommand(
             'dynamic-macro.repeat',
-            async function() {
+            function() {
                 if (api) {
-                    await repeat(api);
+                    // Discard the returned Promise to avoid potential deadlock.
+                    repeatCommand(api);
                 }
             }
         )
