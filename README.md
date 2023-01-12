@@ -44,11 +44,10 @@ Windowsでのみ動作確認済みですが、LinuxとmacOSでも同じく動作
     git clone https://github.com/tshino/vscode-kb-macro.git
     cd vscode-kb-macro
     npm ci
-    vsce package
+    npx vsce package
     code --install-extension kb-macro-0.12.10.vsix
     cd ..
     ```
-    - `vsce`コマンドは `npm install -g vsce` でインストールできます。
     - `.vsix`ファイルのファイル名にはバージョンが含まれるので、上に書いたコマンドは一例です。
     - VS Codeが既に起動している場合は、インストールした拡張を有効化するためにVS Codeを再起動するか、`Reload Window`コマンドを実行してください。
     - Keyboard Macro BetaのREADMEを読んで、必要な追加の作業があれば行ってください。とくに、VS Code上のキーマップ拡張を使っている場合は必ず対応するラッパー（keymap wrapper）の設定が必要です。
@@ -59,7 +58,7 @@ Windowsでのみ動作確認済みですが、LinuxとmacOSでも同じく動作
     git clone https://github.com/tshino/vscode-dynamic-macro.git
     cd vscode-dynamic-macro
     npm ci
-    vsce package
+    npx vsce package
     code --install-extension dynamic-macro-0.0.1.vsix
     cd ..
     ```
