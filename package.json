@@ -1,7 +1,7 @@
 {
     "name": "dynamic-macro",
     "displayName": "Dynamic Macro",
-    "description": "",
+    "description": "Help repetitive keyboard operations with a dedicated REPEAT key",
     "version": "0.0.1",
     "publisher": "tshino",
     "engines": {
@@ -33,6 +33,7 @@
                     "type": "number",
                     "default": 64,
                     "minimum": 1,
+                    "maximum": 128,
                     "description": "Specifies the maximum length of a macro that the Dynamic Macro extension can detect and run"
                 }
             }
