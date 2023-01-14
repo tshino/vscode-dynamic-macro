@@ -34,6 +34,16 @@
 このVS Code拡張は別のVS Code拡張である [Keyboard Macro Beta](https://marketplace.visualstudio.com/items?itemName=tshino.kb-macro) の機能を利用して実現しているため、どの操作が記録可能かといった基本的なことはKeyboard Macro BetaのREADMEに書かれています。
 また正しく動作させるためにはインストール後に追加の設定が必要な場合があります。Keyboard Macro BetaのREADMEを読んで必要な設定を行ってください。とくに、VS Code上のキーマップ拡張を使っている場合は必ず対応するラッパー（keymap wrapper）の設定が必要です。
 
+## コマンド
+
+このVS Code拡張が提供するコマンドは1つだけです。
+
+| コマンド名 | Command ID | 機能 | キー |
+| ---------- | ---------- | ---- | ---- |
+| Dynamic Macro: Repeat | `dynamic-macro.repeat` | 直前のキー操作を繰り返す | <kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>L</kbd> |
+
+もし誤って長いマクロを実行してしまった場合などは、<kbd>Esc</kbd>キーでマクロの実行を止めることができます。これはKeyboard Macro Betaが提供している機能です。
+
 ## 割り当てるキーの変更方法
 
 以下のような記述を、VS Codeの設定ファイルの1つである `keybindings.json` に追加することで、キーの割り当てを変更できます。

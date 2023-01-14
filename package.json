@@ -37,6 +37,13 @@
                 }
             }
         },
+        "commands": [
+            {
+                "command": "dynamic-macro.repeat",
+                "title": "Repeat",
+                "category": "Dynamic Macro"
+            }
+        ],
         "keybindings": [
             {
                 "key": "ctrl+alt+l",
