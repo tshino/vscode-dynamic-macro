@@ -22,10 +22,7 @@ const getApi = (function() {
             return;
         }
         const requiredApis = [
-            'startBackgroundRecording',
-            'stopBackgroundRecording',
-            'getRecentBackgroundRecords',
-            'areEqualRecords',
+            'newSession',
         ];
         for (const func of requiredApis) {
             if (!(func in api)) {

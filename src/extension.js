@@ -3,13 +3,13 @@ const kbmacro = require('./kbmacro.js');
 const dmacro = require('./dmacro.js');
 const reentrantGuard = require('./reentrant_guard.js');
 
-const playback = async function(api, sequence) {
-    await api.stopBackgroundRecording();
+const playback = async function(session, sequence) {
+    await session.stopRecording();
     await vscode.commands.executeCommand(
         'kb-macro.playback',
         { sequence }
     );
-    await api.startBackgroundRecording();
+    await session.startRecording();
 }
 
 const getConfig = function() {
@@ -19,18 +19,18 @@ const getConfig = function() {
 
 let lastMacro = null;
 const repeatCommand = reentrantGuard.makeQueueableCommand(
-    async function(api) {
-        const records = api.getRecentBackgroundRecords();
+    async function(session) {
+        const records = session.getRecentSequence();
         const config = getConfig();
 
-        const { macro, position=0 } = dmacro.detect(records, api.areEqualRecords, config);
+        const { macro, position=0 } = dmacro.detect(records, session.areEqualRecords, config);
         if (macro) {
             lastMacro = macro;
-            await playback(api, macro.slice(position));
+            await playback(session, macro.slice(position));
             return;
         }
         if (records.length === 0 && lastMacro) {
-            await playback(api, lastMacro);
+            await playback(session, lastMacro);
             return;
         }
         lastMacro = null;
@@ -39,29 +39,29 @@ const repeatCommand = reentrantGuard.makeQueueableCommand(
 );
 
 function activate(context) {
-    let api = null;
+    let session = null;
 
     context.subscriptions.push(
         vscode.commands.registerCommand(
             'dynamic-macro.repeat',
             function() {
-                if (api) {
+                if (session) {
                     // Discard the returned Promise to avoid potential deadlock.
-                    repeatCommand(api);
+                    repeatCommand(session);
                 }
             }
         )
     );
 
-    kbmacro.getApi().then(async kbmacroApi => {
-        await kbmacroApi.startBackgroundRecording();
-        api = kbmacroApi;
+    kbmacro.getApi().then(async api => {
+        session = api.newSession();
+        await session.startRecording();
     });
 }
 
 function deactivate() {}
 
 module.exports = {
-	activate,
-	deactivate
+    activate,
+    deactivate
 }
