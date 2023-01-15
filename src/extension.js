@@ -10,16 +10,17 @@ const playback = async function(session, sequence) {
         { sequence }
     );
     await session.startRecording();
-}
+};
 
 const getConfig = function() {
     const config = vscode.workspace.getConfiguration('dynamicMacro');
     return config;
 };
 
-let lastMacro = null;
-const repeatCommand = reentrantGuard.makeQueueableCommand(
-    async function(session) {
+const RepeatCommand = function(session) {
+    let lastMacro = null;
+
+    const repeat = reentrantGuard.makeQueueableCommand(async function() {
         const records = session.getRecentSequence();
         const config = getConfig();
 
@@ -34,32 +35,41 @@ const repeatCommand = reentrantGuard.makeQueueableCommand(
             return;
         }
         lastMacro = null;
-    },
-    { queueSize: 2 }
-);
+    }, { queueSize: 2 });
+
+    return repeat;
+};
+
+let closeSession = null;
 
 function activate(context) {
-    let session = null;
+    let repeat = null;
 
     context.subscriptions.push(
         vscode.commands.registerCommand(
             'dynamic-macro.repeat',
             function() {
-                if (session) {
+                if (repeat) {
                     // Discard the returned Promise to avoid potential deadlock.
-                    repeatCommand(session);
+                    repeat();
                 }
             }
         )
     );
 
     kbmacro.getApi().then(async api => {
-        session = api.newSession();
+        const session = api.newSession();
+        closeSession = session.close;
         await session.startRecording();
+        repeat = RepeatCommand(session);
     });
 }
 
-function deactivate() {}
+function deactivate() {
+    if (closeSession) {
+        closeSession();
+    }
+}
 
 module.exports = {
     activate,
