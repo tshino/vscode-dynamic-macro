@@ -1,5 +1,11 @@
 const vscode = require('vscode');
 
+const error = function(message) {
+    console.error(message);
+    vscode.window.showErrorMessage(message);
+};
+
+
 const getApi = (function() {
     let api = null;
 
@@ -9,7 +15,7 @@ const getApi = (function() {
         }
         const extension = vscode.extensions.getExtension('tshino.kb-macro');
         if (!extension) {
-            console.error('Dynamic Macro: The Keyboard Macro Beta extension not found.');
+            error('Dynamic Macro: The Keyboard Macro Beta extension not found.');
             return;
         }
         if (!extension.isActive) {
@@ -18,7 +24,7 @@ const getApi = (function() {
             api = extension.exports;
         }
         if (!api) {
-            console.error('Dynamic Macro: The Keyboard Macro Beta extension seems to have no API.');
+            error('Dynamic Macro: The Keyboard Macro Beta extension seems to have no API.');
             return;
         }
         const requiredApis = [
@@ -26,7 +32,7 @@ const getApi = (function() {
         ];
         for (const func of requiredApis) {
             if (!(func in api)) {
-                console.error(`Dynamic Macro: The Keyboard Macro Beta extension does not have the ${func} API.`);
+                error(`Dynamic Macro: The Keyboard Macro Beta extension does not have the ${func} API.`);
                 return;
             }
         }
