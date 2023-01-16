@@ -40,8 +40,6 @@ const RepeatCommand = function(session) {
     return repeat;
 };
 
-let closeSession = null;
-
 function activate(context) {
     let repeat = null;
 
@@ -59,17 +57,15 @@ function activate(context) {
 
     kbmacro.getApi().then(async api => {
         const session = api.newSession();
-        closeSession = session.close;
+        context.subscriptions.push(
+            new vscode.Disposable(() => session.close)
+        );
         await session.startRecording();
         repeat = RepeatCommand(session);
     });
 }
 
-function deactivate() {
-    if (closeSession) {
-        closeSession();
-    }
-}
+function deactivate() {}
 
 module.exports = {
     activate,
