@@ -11,6 +11,7 @@
         "Keymaps",
         "Other"
     ],
+    "icon": "images/dynamic-macro-icon.png",
     "keywords": [
         "dynamic macro",
         "keyboard macro",
