@@ -36,8 +36,15 @@
 
 ## 重要な注意事項
 
-このVS Code拡張は別のVS Code拡張である [Keyboard Macro Beta](https://marketplace.visualstudio.com/items?itemName=tshino.kb-macro) の機能を利用して実現しているため、これも自動でインストールされます。どのキー操作が記録可能かといった基本的なことはKeyboard Macro BetaのREADMEに書かれています。
-また正しく動作させるためにはインストール後に追加の設定が必要な場合があります。Keyboard Macro BetaのREADMEを読んで必要な設定を行ってください。とくに、VS Code上のキーマップ拡張を使っている場合は必ず対応するラッパー（keymap wrapper）の設定が必要です。
+- **Keyboard Macro Betaが自動的にインストールされます**
+    - Dynamic Macroは、別の拡張機能である [Keyboard Macro Beta](https://marketplace.visualstudio.com/items?itemName=tshino.kb-macro) の機能を利用して実現しているため、この2つが同時にインストールされます。
+    - Keyboard Macro Betaは基本的なキーボードマクロ機能を提供しています。どのキー操作が記録可能かといった基本的なことはDynamic Macroでも共通なので、Keyboard Macro BetaのREADMEを参照してください。
+- **インストールしただけでは動かない場合があります**
+    - [Keyboard Macro Beta](https://marketplace.visualstudio.com/items?itemName=tshino.kb-macro)のREADMEを読んで必要な設定を行ってください。とくに、キーマップ拡張を使っている場合は必ず対応するラッパー（keymap wrapper）の設定が必要です。
+- **Dynamic Macroをインストールすると `kb-macro.active` が常にtrueになります**
+    - Keyboard Macro Betaはキー操作の記録状態を制御するために `kb-macro.active` というコンテキスト変数を提供していて、通常はキーボードマクロの記録開始から終了までの間だけ true になりますが、Dynamic Macroが同時にインストールされている場合は `kb-macro.active` が常にtrue になります。
+    - そのため、すべてのラッパー（keybinding wrapper）が常時有効な状態です。
+    - もし、追加のキー操作を定義するような何らかの拡張機能を他にインストールしている場合は、その操作に対応するラッパーを設定しないと、その拡張のキー操作が正しく働かない場合があります。
 
 ## コマンド
 
