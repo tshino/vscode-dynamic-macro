@@ -1,7 +1,6 @@
 const vscode = require('vscode');
 const kbmacro = require('./kbmacro.js');
-const dmacro = require('./dmacro.js');
-const reentrantGuard = require('./reentrant_guard.js');
+const { RepeatCommand } = require('./repeat_command.js');
 
 const playback = async function(session, sequence) {
     await session.stopRecording();
@@ -15,29 +14,6 @@ const playback = async function(session, sequence) {
 const getConfig = function() {
     const config = vscode.workspace.getConfiguration('dynamicMacro');
     return config;
-};
-
-const RepeatCommand = function(session) {
-    let lastMacro = null;
-
-    const repeat = reentrantGuard.makeQueueableCommand(async function() {
-        const records = session.getRecentSequence();
-        const config = getConfig();
-
-        const { macro, position=0 } = dmacro.detect(records, session.areEqualRecords, config);
-        if (macro) {
-            lastMacro = macro;
-            await playback(session, macro.slice(position));
-            return;
-        }
-        if (records.length === 0 && lastMacro) {
-            await playback(session, lastMacro);
-            return;
-        }
-        lastMacro = null;
-    }, { queueSize: 2 });
-
-    return repeat;
 };
 
 function activate(context) {
@@ -61,7 +37,7 @@ function activate(context) {
             new vscode.Disposable(() => session.close)
         );
         await session.startRecording();
-        repeat = RepeatCommand(session);
+        repeat = RepeatCommand(session, { playback, getConfig });
     });
 }
 
