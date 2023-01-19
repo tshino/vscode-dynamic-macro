@@ -1,5 +1,7 @@
 # Dynamic Macro for Visual Studio Code
 
+[![Node.js CI](https://github.com/tshino/vscode-dynamic-macro/actions/workflows/node.js.yml/badge.svg)](https://github.com/tshino/vscode-dynamic-macro/actions/workflows/node.js.yml)
+
 このVS Code拡張を使うと、繰り返しのキーボード操作をシンプルな操作ですばやく実行できるようになります。
 
 [増井俊之](https://github.com/masui)氏の[Dynamic Macro](https://scrapbox.io/masui/Dynamic_Macro)というテクニックをVS Code用に実装したものです。
