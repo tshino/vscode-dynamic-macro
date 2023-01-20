@@ -1,7 +1,5 @@
-# Change Log
+# 変更履歴
 
-All notable changes to the Dynamic Macro extension will be documented in this file.
+## [v0.1.0] - 2023-01-21
 
-## [Unreleased]
-
-- Initial release
+- 初リリース

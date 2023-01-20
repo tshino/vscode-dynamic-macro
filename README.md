@@ -32,7 +32,7 @@
     abc abc abc _
     ```
 
-### キーボードマクロとの違い
+## キーボードマクロとの違い
 
 - 記録開始と記録終了の明示的な操作が不要
 - どこからどこまでが繰り返しの1回分の操作かを意識しなくても使える
@@ -84,34 +84,9 @@ VS Codeの設定画面から以下の設定を変更できます。
 | ------ | ------ | ---------- |
 | Max Macro Length | 64 | 検出するマクロの最大長 <br>長いマクロの誤検出が気になる場合は小さめに設定してください |
 
-## インストール方法（正式リリースまでの暫定的な情報です）
+## 変更履歴
 
-Marketplace には未公開のため、以下のように手動でインストールする必要があります。
-
-Windowsでのみ動作確認済みですが、LinuxとmacOSでも同じ方法でインストールでき、動作すると思います。
-
-1. 必要なソフトウェアをインストール
-    - [Node.js](https://nodejs.org/en/)
-    - [Git](https://git-scm.com/)
-
-2. Dynamic Macro の最新版をインストール
-    - 本リポジトリから最新版を取得します。
-    ```
-    git clone https://github.com/tshino/vscode-dynamic-macro.git
-    cd vscode-dynamic-macro
-    npm ci
-    npx vsce package
-    code --install-extension dynamic-macro-0.0.1.vsix
-    ```
-    - 最後の行はパッケージをVS Codeにインストールしています。
-    - `.vsix`ファイルのファイル名にはバージョンが含まれるので、上に書いたコマンドは一例です。
-    - このとき[Keyboard Macro Beta](https://marketplace.visualstudio.com/items?itemName=tshino.kb-macro)も（未インストールであれば）自動的にインストールされます。
-    - VS Codeが既に起動している場合は、インストールした拡張を有効化するためにVS Codeを再起動するか、Reload Window コマンドを実行してください。
-3. Keyboard Macro Betaの初期設定
-    - Keyboard Macro BetaのREADMEを読んで、必要な追加の作業があれば行ってください。
-    - とくに、VS Code上のキーマップ拡張を使っている場合は必ず対応するラッパー（keymap wrapper）の設定が必要です。
-
-以上です。これでDynamic Macroが使えるはずです。
+[CHANGELOG.md](CHANGELOG.md)
 
 ## 参考
 
