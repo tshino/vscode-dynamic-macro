@@ -1,20 +1,7 @@
 const vscode = require('vscode');
+const util = require('./util.js');
 const kbmacro = require('./kbmacro.js');
 const { RepeatCommand } = require('./repeat_command.js');
-
-const playback = async function(session, sequence) {
-    await session.stopRecording();
-    await vscode.commands.executeCommand(
-        'kb-macro.playback',
-        { sequence }
-    );
-    await session.startRecording();
-};
-
-const getConfig = function() {
-    const config = vscode.workspace.getConfiguration('dynamicMacro');
-    return config;
-};
 
 function activate(context) {
     let repeat = null;
@@ -37,7 +24,7 @@ function activate(context) {
             new vscode.Disposable(() => session.close)
         );
         await session.startRecording();
-        repeat = RepeatCommand(session, { playback, getConfig });
+        repeat = RepeatCommand(session, util);
     });
 }
 
