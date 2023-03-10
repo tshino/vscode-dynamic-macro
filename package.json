@@ -64,9 +64,9 @@
     },
     "devDependencies": {
         "@vscode/test-electron": "^2.3.0",
+        "@vscode/vsce": "^2.18.0",
         "eslint": "^8.35.0",
-        "mocha": "^10.2.0",
-        "vsce": "^2.15.0"
+        "mocha": "^10.2.0"
     },
     "extensionDependencies": [
         "tshino.kb-macro"
