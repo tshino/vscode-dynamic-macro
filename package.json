@@ -22,8 +22,7 @@
         "url": "https://github.com/tshino/vscode-dynamic-macro.git"
     },
     "activationEvents": [
-        "onStartupFinished",
-        "onCommand:dynamic-macro.repeat"
+        "onStartupFinished"
     ],
     "main": "./src/extension.js",
     "contributes": {
