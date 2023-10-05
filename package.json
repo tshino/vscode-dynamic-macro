@@ -63,7 +63,7 @@
         "test": "node ./test/runTest.js"
     },
     "devDependencies": {
-        "@vscode/test-electron": "^2.3.4",
+        "@vscode/test-electron": "^2.3.5",
         "@vscode/vsce": "^2.21.1",
         "eslint": "^8.50.0",
         "mocha": "^10.2.0"
