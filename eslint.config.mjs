@@ -1,6 +1,9 @@
+import js from "@eslint/js";
 import globals from "globals";
 
-export default [{
+export default [
+js.configs.recommended,
+{
     languageOptions: {
         globals: {
             ...globals.node,
@@ -16,18 +19,11 @@ export default [{
             },
         },
     },
-
     rules: {
-        "no-const-assign": "warn",
-        "no-this-before-super": "warn",
-        "no-undef": "warn",
-        "no-unreachable": "warn",
         "no-unused-vars": [ "warn", {
             "argsIgnorePattern": "^_",
             "caughtErrorsIgnorePattern": "^_"
         } ],
-        "constructor-super": "warn",
-        "valid-typeof": "warn",
     },
 }, {
     ignores: [
