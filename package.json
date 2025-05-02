@@ -68,7 +68,7 @@
         "@vscode/vsce": "^3.3.2",
         "eslint": "^9.25.1",
         "globals": "^16.0.0",
-        "mocha": "^11.1.0"
+        "mocha": "^11.2.2"
     },
     "extensionDependencies": [
         "tshino.kb-macro"
