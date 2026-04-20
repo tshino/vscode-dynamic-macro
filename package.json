@@ -65,7 +65,7 @@
     "devDependencies": {
         "@eslint/js": "^10.0.1",
         "@vscode/test-electron": "^2.5.2",
-        "@vscode/vsce": "^3.7.1",
+        "@vscode/vsce": "^3.9.1",
         "eslint": "^10.2.0",
         "globals": "^17.5.0",
         "mocha": "^11.7.5"
